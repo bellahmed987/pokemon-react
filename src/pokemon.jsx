@@ -51,9 +51,13 @@ export default function Poke() {
                 onChange={(e) => setSearch(e.target.value)}
             />
             <div className="cardslist">
-                {filteredPokemons.map((pokemon) => (
-                    <Card key={pokemon.id} pokmon={pokemon} />
-                ))}
+                {filteredPokemons.length === 0 ? (
+                    <p>No Pokémon found.</p>
+                ) : (
+                    filteredPokemons.map((pokemon, index) => (
+                        <Card key={`${pokemon.id}-${offset}-${index}`} pokmon={pokemon} />
+                    ))
+                )}
             </div>
             {loading && <span className="loader"></span>}
             {hasMore && !loading && (
